@@ -1,2 +1,49 @@
 <p>payment works!</p>
-<button class="btn btn-info" [routerLink]="'/payment-successful'">PAY</button>
+{{form.value | json}}
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form [formGroup]="form">
+        <div class="form-group">
+          <label for="creditCardNumber">Credit Card Number</label>
+          <input type="text"
+                 formControlName="creditCardNumber"
+                 id="creditCradNumber"
+                 class="form-control">
+
+          <span *ngIf="shouldDisplayErrorForControl('creditCardNumber')">
+            ERROR
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="cardholder">Card holder name</label>
+          <input type="text"
+                 formControlName="cardholder"
+                 id="cardholder"
+                 class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="expirationDate">Expiration date</label>
+          <input type="date"
+                 formControlName="expirationDate"
+                 id="expirationDate"
+                 class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="securityCode">Security Code</label>
+          <input type="string"
+                 formControlName="securityCode"
+                 id="securityCode"
+                 class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="amount">Amount</label>
+          <input type="number"
+                 formControlName="amount"
+                 id="amount"
+                 class="form-control">
+        </div>
+      </form>
+    </div>
+  </div>
+<button class="btn btn-info" (click)="submit()">PAY</button>
