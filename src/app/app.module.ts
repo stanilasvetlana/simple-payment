@@ -11,6 +11,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
+import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {ToastrModule} from 'ngx-toastr';
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot({})
+    ToastrModule.forRoot({}),
+    RxReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
