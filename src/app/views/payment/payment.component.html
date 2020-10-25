@@ -17,7 +17,7 @@
                        formControlName="creditCardNumber"
                        id="creditCardNumber"
                        class="form-control" placeholder="Valid Card Number">
-                <span *ngIf="!form.get('creditCardNumber').valid && form.get('creditCardNumber').touched"
+                <span *ngIf="!form.get('creditCardNumber')?.valid && form.get('creditCardNumber')?.touched"
                       class="help-block error">Please, enter a valid credit card number!</span>
               </div>
             </div>
@@ -30,7 +30,7 @@
                        formControlName="cardholder"
                        id="cardholder"
                        class="form-control" placeholder="Card Owner Names">
-                <span *ngIf="!form.get('cardholder').valid && form.get('cardholder').touched"
+                <span *ngIf="!form.get('cardholder')?.valid && form.get('cardholder')?.touched"
                       class="help-block error">Please, enter your name!</span>
               </div>
             </div>
@@ -45,7 +45,7 @@
                        formControlName="expirationDate"
                        id="expirationDate"
                        class="form-control">
-                <span *ngIf="!form.get('expirationDate').valid && form.get('expirationDate').touched"
+                <span *ngIf="!form.get('expirationDate')?.valid && form.get('expirationDate')?.touched"
                       class="help-block error">Please, enter a valid date!</span>
               </div>
             </div>
@@ -61,7 +61,7 @@
                        maxlength="3"
                        class="form-control" rxdigit="digit"
                        placeholder="CVC">
-                <span *ngIf="!form.get('securityCode').valid && form.get('securityCode').touched"
+                <span *ngIf="!form.get('securityCode')?.valid && form.get('securityCode')?.touched"
                       class="help-block error">Please, enter 3 digits!</span>
               </div>
             </div>
@@ -74,7 +74,7 @@
                        formControlName="amount"
                        id="amount"
                        class="form-control">
-                <span *ngIf="!form.get('amount').valid && form.get('amount').touched"
+                <span *ngIf="!form.get('amount')?.valid && form.get('amount')?.touched"
                       class="help-block error">Please, enter a value greater then 0!</span>
               </div>
             </div>

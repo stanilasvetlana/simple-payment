@@ -22,7 +22,7 @@ export class PaymentSuccessfulComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // sessionStorage.clear();
+    sessionStorage.clear();
   }
 
 }
