@@ -1,49 +1,97 @@
-<p>payment works!</p>
+
 {{form.value | json}}
 
-  <div class="row">
-    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-      <form [formGroup]="form">
-        <div class="form-group">
-          <label for="creditCardNumber">Credit Card Number</label>
-          <input type="text"
-                 formControlName="creditCardNumber"
-                 id="creditCradNumber"
-                 class="form-control">
-
-          <span *ngIf="shouldDisplayErrorForControl('creditCardNumber')">
-            ERROR
-          </span>
+<div class="row">
+  <div class="col-xs-4 col-md-4 col-md-offset-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="row">
+          <h4 class="text-center">Payment Details</h4>
+          <img class="img-responsive cc-img" src="http://www.prepbootstrap.com/Content/images/shared/misc/creditcardicons.png">
         </div>
-        <div class="form-group">
-          <label for="cardholder">Card holder name</label>
-          <input type="text"
-                 formControlName="cardholder"
-                 id="cardholder"
-                 class="form-control">
-        </div>
-        <div class="form-group">
-          <label for="expirationDate">Expiration date</label>
-          <input type="date"
-                 formControlName="expirationDate"
-                 id="expirationDate"
-                 class="form-control">
-        </div>
-        <div class="form-group">
-          <label for="securityCode">Security Code</label>
-          <input type="string"
-                 formControlName="securityCode"
-                 id="securityCode"
-                 class="form-control">
-        </div>
-        <div class="form-group">
-          <label for="amount">Amount</label>
-          <input type="number"
-                 formControlName="amount"
-                 id="amount"
-                 class="form-control">
-        </div>
-      </form>
+      </div>
+      <div class="panel-body">
+        <form [formGroup]="form" (ngSubmit)="submit()">
+          <div class="row">
+            <div class="col-xs-12 col-md-12">
+              <div class="form-group">
+                <label for="creditCardNumber">Credit Card Number</label>
+                <input type="text"
+                       formControlName="creditCardNumber"
+                       id="creditCardNumber"
+                       class="form-control" placeholder="Valid Card Number">
+                <span *ngIf="!form.get('creditCardNumber').valid && form.get('creditCardNumber').touched"
+                      class="help-block error">Please, enter a valid credit card number!</span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-12">
+              <div class="form-group">
+                <label for="cardholder">Card holder name</label>
+                <input type="text"
+                       formControlName="cardholder"
+                       id="cardholder"
+                       class="form-control" placeholder="Card Owner Names">
+                <span *ngIf="!form.get('cardholder').valid && form.get('cardholder').touched"
+                      class="help-block error">Please, enter your name!</span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-12">
+              <div class="form-group">
+                <label for="expirationDate">Expiration date</label>
+                <input type="date"
+                       formControlName="expirationDate"
+                       id="expirationDate"
+                       class="form-control">
+                <span *ngIf="!form.get('expirationDate').valid && form.get('expirationDate').touched"
+                      class="help-block error">Please, enter a valid date!</span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-12">
+              <div class="form-group">
+                <label for="securityCode">Security Code</label>
+                <input type="text"
+                       formControlName="securityCode"
+                       id="securityCode"
+                       minlength="3"
+                       maxlength="3"
+                       class="form-control" rxdigit="digit"
+                       placeholder="CVC">
+                <span *ngIf="!form.get('securityCode').valid && form.get('securityCode').touched"
+                      class="help-block error">Please, enter 3 digits!</span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-12">
+              <div class="form-group">
+                <label for="amount">Amount</label>
+                <input type="number"
+                       formControlName="amount"
+                       id="amount"
+                       class="form-control">
+                <span *ngIf="!form.get('amount').valid && form.get('amount').touched"
+                      class="help-block error">Please, enter a value greater then 0!</span>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
-<button class="btn btn-info" (click)="submit()">PAY</button>
+</div>
+
+<div class="panel-footer">
+  <div class="row">
+    <div class="col-xs-4 col-md-4">
+      <button class="btn-warning btn-lg btn-block" [disabled]="form.invalid"  (click)="submit()">PAYMENT</button>
+    </div>
+  </div>
+</div>
+
+
