@@ -1,15 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {SessionStorageKeys} from '../../types';
+import {Router} from '@angular/router';
+import {IPaymentRequest, IPaymentResponse} from '../../services/payment.models';
 
 @Component({
   selector: 'app-success',
   templateUrl: './payment-successful.component.html',
   styleUrls: ['./payment-successful.component.css']
 })
-export class PaymentSuccessfulComponent implements OnInit {
+export class PaymentSuccessfulComponent implements OnDestroy {
+  transactionDetails?: IPaymentRequest;
+  constructor(private router: Router) {
+    const transactionString: string | null = sessionStorage.getItem(SessionStorageKeys.LastTransaction);
 
-  constructor() { }
+    if (!transactionString) {
+      this.router.navigate(['/payment']);
+      return;
+    }
 
-  ngOnInit(): void {
+    this.transactionDetails = JSON.parse(transactionString);
+  }
+
+  ngOnDestroy(): void {
+    // sessionStorage.clear();
   }
 
 }

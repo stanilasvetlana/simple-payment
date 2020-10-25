@@ -7,6 +7,7 @@ import {tap} from 'rxjs/operators';
 import {ToastrService} from 'ngx-toastr';
 import {RxwebValidators} from '@rxweb/reactive-form-validators';
 import {minDateValidatorExtension} from '@rxweb/reactive-form-validators/validators-extension';
+import {SessionStorageKeys} from '../../types';
 
 
 @Component({
@@ -14,7 +15,7 @@ import {minDateValidatorExtension} from '@rxweb/reactive-form-validators/validat
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.css']
 })
-export class PaymentComponent implements OnInit{
+export class PaymentComponent {
   public form!: FormGroup;
   public currentDate: string = new Date().toISOString().split('T')[0];
 
@@ -36,23 +37,18 @@ export class PaymentComponent implements OnInit{
       securityCode: [undefined, [Validators.minLength(3), Validators.maxLength(3) ]],
       amount: [undefined, [Validators.required, Validators.min(0)]]
     });
-    this.form.valueChanges.pipe(
-      tap(value => console.log(value))
-    ).subscribe();
   }
 
   submit(): void {
-    console.log(this.form.controls.creditCardNumber);
-    console.log(this.form.getRawValue());
-
     this.form.markAllAsTouched();
 
-    // if (!this.form.valid) {
-    //   return;
-    // }
+    if (!this.form.valid) {
+       return;
+    }
     this.paymentService.performPayment(this.form.getRawValue()).pipe(
       tap(response => {
         if (response.status === PaymentStatus.Success) {
+          sessionStorage.setItem(SessionStorageKeys.LastTransaction, JSON.stringify(this.form.getRawValue()));
           this.router.navigate(['/payment-successful']);
         } else {
           this.toastr.error(response.reason);
