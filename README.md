@@ -1,6 +1,6 @@
 # Simple payment app
 
-Check it out here: https://stackblitz.com/github/stanilasvetlana/simple-payment
+Check it out here: https://stackblitz.com/github/stanilasvetlana/simple-payment (can be outdated)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
 
