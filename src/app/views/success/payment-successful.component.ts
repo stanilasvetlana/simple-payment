@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {SessionStorageKeys} from '../../types';
 import {Router} from '@angular/router';
-import {IPaymentRequest, IPaymentResponse} from '../../services/payment.models';
+import {IPaymentRequestDto, IPaymentResponseDto} from '../../services/payment.models';
 
 @Component({
   selector: 'app-success',
@@ -9,7 +9,7 @@ import {IPaymentRequest, IPaymentResponse} from '../../services/payment.models';
   styleUrls: ['./payment-successful.component.css']
 })
 export class PaymentSuccessfulComponent implements OnDestroy {
-  transactionDetails?: IPaymentRequest;
+  transactionDetails?: IPaymentRequestDto;
   constructor(private router: Router) {
     const transactionString: string | null = sessionStorage.getItem(SessionStorageKeys.LastTransaction);
 

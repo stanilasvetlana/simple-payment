@@ -45,10 +45,11 @@ export class PaymentComponent {
     if (!this.form.valid) {
        return;
     }
-    this.paymentService.performPayment(this.form.getRawValue()).pipe(
+    const formValue = this.form.getRawValue();
+    this.paymentService.performPayment(formValue).pipe(
       tap(response => {
         if (response.status === PaymentStatus.Success) {
-          sessionStorage.setItem(SessionStorageKeys.LastTransaction, JSON.stringify(this.form.getRawValue()));
+          sessionStorage.setItem(SessionStorageKeys.LastTransaction, JSON.stringify(formValue));
           this.router.navigate(['/payment-successful']);
         } else {
           this.toastr.error(response.reason);

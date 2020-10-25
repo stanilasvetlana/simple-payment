@@ -1,4 +1,4 @@
-export interface IPaymentRequest {
+export interface IPaymentRequestDto {
   creditCardNumber: string;
   cardholder: string;
   expirationDate: Date;
@@ -11,7 +11,7 @@ export enum PaymentStatus {
   Error = 'Error'
 }
 
-export interface IPaymentResponse {
+export interface IPaymentResponseDto {
   status: PaymentStatus;
   reason?: string;
 }
