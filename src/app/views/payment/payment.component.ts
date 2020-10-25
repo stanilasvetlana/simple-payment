@@ -5,6 +5,8 @@ import { FormBuilder,  FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {tap} from 'rxjs/operators';
 import {ToastrService} from 'ngx-toastr';
+import {RxwebValidators} from '@rxweb/reactive-form-validators';
+import {minDateValidatorExtension} from '@rxweb/reactive-form-validators/validators-extension';
 
 
 @Component({
@@ -14,6 +16,7 @@ import {ToastrService} from 'ngx-toastr';
 })
 export class PaymentComponent implements OnInit{
   public form!: FormGroup;
+  public currentDate: string = new Date().toISOString().split('T')[0];
 
 
   constructor(
@@ -29,10 +32,13 @@ export class PaymentComponent implements OnInit{
     this.form = this.formBuilder.group({
       creditCardNumber: [undefined, [Validators.required, Validators.pattern(regexValidator)]],
       cardholder: [undefined, Validators.required],
-      expirationDate: [undefined, Validators.required],
+      expirationDate: [undefined, [Validators.required]],
       securityCode: [undefined, [Validators.minLength(3), Validators.maxLength(3) ]],
       amount: [undefined, [Validators.required, Validators.min(0)]]
     });
+    this.form.valueChanges.pipe(
+      tap(value => console.log(value))
+    ).subscribe();
   }
 
   submit(): void {
